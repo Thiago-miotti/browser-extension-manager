@@ -22,7 +22,7 @@ This project was built using a modern and powerful technology stack:
 
 Below, you can see a glimpse of the design and functionality of our extension manager, showing the layout with the dark theme:
 
-![Layout of the extension manager page]('./ReadMePhoto.webp')
+![Layout of the extension manager page]('public/ReadMePhoto.webp')
 
 ## 🚀 How to Run the Project (Locally)
 
@@ -31,8 +31,8 @@ To set up and run the project on your local machine, follow these steps:
 1.  **Clone the repository:**
 
     ```bash
-    git clone [YOUR_REPOSITORY_URL]
-    cd [YOUR_PROJECT_FOLDER_NAME]
+    git clone browser-extension-manager.git
+    cd browser-extension-manager
     ```
 
 2.  **Install dependencies:**
