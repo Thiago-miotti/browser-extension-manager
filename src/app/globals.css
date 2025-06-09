@@ -1,26 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-neutral-900: #091540;
+  --color-neutral-800: #202535;
+  --color-neutral-700: #2f364b;
+  --color-neutral-600: #535868;
+  --color-neutral-300: #c8c6c6;
+  --color-neutral-200: #d0e2f5;
+  --color-neutral-100: #eeeeee;
+  --color-neutral-0: #fbfdfe;
+
+  --color-red-400: #f25c54;
+  --color-red-500: #de4b40;
+  --color-red-700: #c7231a;
+
+  --gradient-light: linear-gradient(180deg, #ebf2fc 0%, #eefbf9 100%);
+  --gradient-dark: linear-gradient(180deg, #04091b 0%, #091540 100%);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+    --text-preset-1-size: 34px;
+    --text-preset-1-line-height: 100%;
+    --text-preset-1-letter-spacing: -1px;
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    --text-preset-2-size: 20px;
+    --text-preset-2-line-height: 120%;
+    --text-preset-2-letter-spacing: -0.2px;
+
+    --text-preset-3-size: 20px;
+    --text-preset-3-line-height: 140%;
+    --text-preset-3-letter-spacing: -0.3px;
+
+    --text-preset-4-size: 20px;
+    --text-preset-4-line-height: 140%;
+    --text-preset-4-letter-spacing: -0.3px;
+
+    --text-preset-5-size: 16px;
+    --text-preset-5-line-height: 140%;
+    --text-preset-5-letter-spacing: -0.5px;
+
+    --text-preset-6-size: 16px;
+    --text-preset-6-line-height: 140%;
+    --text-preset-6-letter-spacing: -0.5px;
+  }
+
+  .text-preset-1 {
+    font-size: var(--text-preset-1-size);
+    line-height: var(--text-preset-1-line-height);
+    letter-spacing: var(--text-preset-1-letter-spacing);
+    font-weight: 700; /* Bold */
+    font-family: "Noto Sans", sans-serif;
+  }
+
+  .text-preset-2 {
+    font-size: var(--text-preset-2-size);
+    line-height: var(--text-preset-2-line-height);
+    letter-spacing: var(--text-preset-2-letter-spacing);
+    font-weight: 700; /* Bold */
+    font-family: "Noto Sans", sans-serif;
+  }
+
+  .text-preset-3 {
+    font-size: var(--text-preset-3-size);
+    line-height: var(--text-preset-3-line-height);
+    letter-spacing: var(--text-preset-3-letter-spacing);
+    font-weight: 400; /* Regular */
+    font-family: "Noto Sans", sans-serif;
+  }
+
+  .text-preset-4 {
+    font-size: var(--text-preset-4-size);
+    line-height: var(--text-preset-4-line-height);
+    letter-spacing: var(--text-preset-4-letter-spacing);
+    font-weight: 500; /* Medium */
+    font-family: "Noto Sans", sans-serif;
+  }
+
+  .text-preset-5 {
+    font-size: var(--text-preset-5-size);
+    line-height: var(--text-preset-5-line-height);
+    letter-spacing: var(--text-preset-5-letter-spacing);
+    font-weight: 400; /* Regular */
+    font-family: "Noto Sans", sans-serif;
+  }
+
+  .text-preset-6 {
+    font-size: var(--text-preset-6-size);
+    line-height: var(--text-preset-6-line-height);
+    letter-spacing: var(--text-preset-6-letter-spacing);
+    font-weight: 500; /* Medium */
+    font-family: "Noto Sans", sans-serif;
+  }
 }
