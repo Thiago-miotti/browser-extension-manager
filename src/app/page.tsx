@@ -1,18 +1,102 @@
 "use client";
-import { Suspense, useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
+import { Suspense, useMemo } from "react";
 import Card from "./components/Card";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
-import { IconComponentName } from "./utils/iconMap";
+import { Extension } from "./types/Extension";
 
-interface Extension {
-  id: number;
-  title: string;
-  description: string;
-  isOn: boolean;
-  icon: IconComponentName;
-}
+
+const mockData = {
+  "extensions": [
+    {
+      "id": 1,
+      "title": "DevLens",
+      "description": "Quickly inspect page layouts and visualize element boundaries.",
+      "isOn": true,
+      "icon": "DevLens"
+    },
+    {
+      "id": 2,
+      "title": "StyleSpy",
+      "description": "Instantly analyze and copy CSS from any webpage element.",
+      "isOn": false,
+      "icon": "StyleSpy"
+    },
+    {
+      "id": 3,
+      "title": "SpeedBoost",
+      "description": "Optimizes browser resource usage to accelerate page loading.",
+      "isOn": false,
+      "icon": "SpeedBoost"
+    },
+    {
+      "id": 4,
+      "title": "JSONWizard",
+      "description": "Formats, validates, and prettifies JSON responses in-browser.",
+      "isOn": true,
+      "icon": "JsonWizard"
+    },
+    {
+      "id": 5,
+      "title": "TabMaster Pro",
+      "description": "Organizes browser tabs into groups and sessions.",
+      "isOn": true,
+      "icon": "TabMasterPro"
+    },
+    {
+      "id": 6,
+      "title": "ViewportBuddy",
+      "description": "Simulates various screen resolutions directly within the browser.",
+      "isOn": false,
+      "icon": "ViewPortBuddy"
+    },
+    {
+      "id": 7,
+      "title": "Markup Notes",
+      "description": "Enables annotation and notes directly onto webpages for collaborative debugging.",
+      "isOn": true,
+      "icon": "MarkupNotes"
+    },
+    {
+      "id": 8,
+      "title": "GridGuides",
+      "description": "Overlay customizable grids and alignment guides on any webpage.",
+      "isOn": false,
+      "icon": "GridGuides"
+    },
+    {
+      "id": 9,
+      "title": "PalettePicker",
+      "description": "Instantly extracts color palettes from any webpage.",
+      "isOn": true,
+      "icon": "PalletePicker"
+    },
+    {
+      "id": 10,
+      "title": "LinkChecker",
+      "description": "Scans and highlights broken links on any page.",
+      "isOn": false,
+      "icon": "LinkChecker"
+    },
+    {
+      "id": 11,
+      "title": "DOM Snapshot",
+      "description": "Capture and export DOM structures quickly.",
+      "isOn": false,
+      "icon": "DomSnapshot"
+    },
+    {
+      "id": 12,
+      "title": "ConsolePlus",
+      "description": "Enhanced developer console with advanced filtering and logging.",
+      "isOn": false,
+      "icon": "ConsolePlus"
+    }
+  ]
+};
+
+
 
 function ExtensionGrid({ allExtensions }: { allExtensions: Extension[] }) {
   const searchParams = useSearchParams();
@@ -49,28 +133,7 @@ function ExtensionGrid({ allExtensions }: { allExtensions: Extension[] }) {
 
 
 export default function Home() {
-  const [allExtensions, setAllExtensions] = useState<Extension[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchExtensions = async () => {
-      try {
-        const response = await fetch("/extensions.json");
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setAllExtensions(data.extensions);
-      } catch (err) {
-        console.error("Failed to fetch extensions:", err);
-        setError("Falha ao carregar extensões. Verifique sua conexão ou o servidor.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchExtensions();
-  }, []);
+  const allExtensions = mockData.extensions;
 
   return (
     <div className="space-y-10 md:space-y-16">

@@ -5,14 +5,18 @@ import { IconComponentName, iconMap } from '../utils/iconMap';
 type CardProps = {
     title: string;
     description: string;
-    icon: IconComponentName;
+    icon: IconComponentName | string;
     initialIsOn: boolean;
 }
 
 export default function Card({ title, description, initialIsOn, icon }: CardProps) {
     const [isSwitchOn, setIsSwitchOn] = useState(initialIsOn);
 
-    const IconComponent = iconMap[icon];
+    const isValidIcon = (icon: string): icon is IconComponentName => {
+        return icon in iconMap;
+    };
+
+    const IconComponent = isValidIcon(icon) ? iconMap[icon] : undefined;
     return (
         <div className='max-w-96 min-h-[200px] flex flex-col justify-between p-5 rounded-[20px] bg-neutral-0 dark:bg-neutral-800 shadow-md border border-neutral-200 dark:border-neutral-600'>
             <div className='flex gap-4'>
