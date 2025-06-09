@@ -22,7 +22,7 @@ This project was built using a modern and powerful technology stack:
 
 Below, you can see a glimpse of the design and functionality of our extension manager, showing the layout with the dark theme:
 
-![Layout of the extension manager page]('public/ReadMePhoto.webp')
+![Layout of the extension manager page](public/ReadMePhoto.webp)
 
 ## 🚀 How to Run the Project (Locally)
 
