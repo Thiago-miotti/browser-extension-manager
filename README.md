@@ -2,6 +2,12 @@
 
 A modern and intuitive browser extension manager developed to optimize how you handle your extensions. Built with the latest technologies, this project offers a fluid and responsive user experience, with dark and light mode support.
 
+## 📸 Application Layout
+
+Below, you can see a glimpse of the design and functionality of our extension manager, showing the layout with the dark theme:
+
+![Layout of the extension manager page](public/ReadMePhoto.webp)
+
 ## ✨ Features
 
 * **Simplified Management**: Efficiently add, remove, and organize your extensions.
@@ -17,12 +23,6 @@ This project was built using a modern and powerful technology stack:
 * **Next.js**: A React framework for high-performance web applications, featuring server-side rendering and static site generation.
 * **Tailwind CSS**: A utility-first CSS framework that allows you to build custom designs rapidly, without leaving your HTML.
 * **TypeScript**: A typed superset of JavaScript that enhances code quality and developer productivity.
-
-## 📸 Application Layout
-
-Below, you can see a glimpse of the design and functionality of our extension manager, showing the layout with the dark theme:
-
-![Layout of the extension manager page](public/ReadMePhoto.webp)
 
 ## 🚀 How to Run the Project (Locally)
 
