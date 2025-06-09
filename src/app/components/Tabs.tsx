@@ -2,27 +2,35 @@ import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation";
 import ButtonTab from "./ButtonTab";
 
-export default function Tabs() {
+interface TabsProps {
+    currentSelectedTab: string;
+}
+
+export default function Tabs({ currentSelectedTab }: TabsProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const [selectedTab, setSelectedTab] = useState(() => {
-        return searchParams.get('tab') || 'all';
-    });
 
     useEffect(() => {
         const newSearchParams = new URLSearchParams(searchParams.toString());
-
-        if (selectedTab && selectedTab !== 'all') {
-            newSearchParams.set('tab', selectedTab);
+        if (currentSelectedTab && currentSelectedTab !== 'all') {
+            newSearchParams.set('tab', currentSelectedTab);
         } else {
             newSearchParams.delete('tab');
         }
 
-        router.replace(`?${newSearchParams.toString()}`);
-    }, [selectedTab, router, searchParams]);
+        if (searchParams.get('tab') !== currentSelectedTab) {
+            router.replace(`?${newSearchParams.toString()}`);
+        }
+    }, [currentSelectedTab, router, searchParams]);
 
     const handleTabClick = (tabName: string) => {
-        setSelectedTab(tabName);
+        const newSearchParams = new URLSearchParams(searchParams.toString());
+        if (tabName !== 'all') {
+            newSearchParams.set('tab', tabName);
+        } else {
+            newSearchParams.delete('tab');
+        }
+        router.push(`?${newSearchParams.toString()}`);
     };
 
     return (
@@ -31,21 +39,21 @@ export default function Tabs() {
             <div className="flex gap-2.5 ">
                 <ButtonTab
                     tabName="all"
-                    selectedTab={selectedTab}
+                    selectedTab={currentSelectedTab}
                     onClick={handleTabClick}
                 >
                     All
                 </ButtonTab>
                 <ButtonTab
                     tabName="active"
-                    selectedTab={selectedTab}
+                    selectedTab={currentSelectedTab}
                     onClick={handleTabClick}
                 >
                     Active
                 </ButtonTab>
                 <ButtonTab
                     tabName="inactive"
-                    selectedTab={selectedTab}
+                    selectedTab={currentSelectedTab}
                     onClick={handleTabClick}
                 >
                     Inactive

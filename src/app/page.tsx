@@ -1,5 +1,6 @@
-"use client"
-import { Suspense, useEffect, useState } from "react";
+"use client";
+import { Suspense, useEffect, useState, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import Card from "./components/Card";
 import Header from "./components/Header";
 import Tabs from "./components/Tabs";
@@ -14,20 +15,23 @@ interface Extension {
 }
 
 export default function Home() {
-  const [extensions, setExtensions] = useState<Extension[]>([]);
+  const [allExtensions, setAllExtensions] = useState<Extension[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const searchParams = useSearchParams();
+  const selectedTab = searchParams.get('tab') || 'all';
 
   useEffect(() => {
     const fetchExtensions = async () => {
       try {
-        const response = await fetch('http://localhost:3000/extensions');
+        const response = await fetch("/extensions.json");
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data: Extension[] = await response.json();
-        setExtensions(data);
+        const data = await response.json();
+        setAllExtensions(data.extensions);
       } catch (err) {
         console.error("Failed to fetch extensions:", err);
         setError("Falha ao carregar extensões. Verifique sua conexão ou o servidor.");
@@ -39,14 +43,26 @@ export default function Home() {
     fetchExtensions();
   }, []);
 
+  const filteredExtensions = useMemo(() => {
+    if (!allExtensions) return [];
+
+    if (selectedTab === 'active') {
+      return allExtensions.filter(ext => ext.isOn);
+    } else if (selectedTab === 'inactive') {
+      return allExtensions.filter(ext => !ext.isOn);
+    } else {
+      return allExtensions;
+    }
+  }, [allExtensions, selectedTab]);
+
   return (
     <div className="space-y-10 md:space-y-16">
       <Header />
       <Suspense fallback={<div>Carregando...</div>}>
-        <Tabs />
+        <Tabs currentSelectedTab={selectedTab} />
       </Suspense>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {extensions.map((extension) => (
+        {filteredExtensions.map((extension) => (
           <Card
             key={extension.id}
             title={extension.title}
